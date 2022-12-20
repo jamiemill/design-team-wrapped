@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Image from "next/image";
 import { useRouter } from 'next/router'
 import Logo from '../components/logo';
 

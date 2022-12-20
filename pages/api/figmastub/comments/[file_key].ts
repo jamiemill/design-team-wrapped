@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import stubComments from "../../../../stubresponses/comments";
 
-// GET/v1/files/:key/comments
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,

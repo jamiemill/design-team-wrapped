@@ -1,14 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-
-/**
- * POST https://www.figma.com/api/oauth/token?
-  client_id=:client_id&
-  client_secret=:client_secret&
-  redirect_uri=:callback&
-  code=:code&
-  grant_type=authorization_code
- */
 
 type Data = {
   access_token: any;
@@ -42,13 +32,6 @@ export default async function handler(
     throw "Error fetching token: " + data.message;
   }
   const { access_token, expires_in, refresh_token } = data;
-  /**
- * expect response to look like
- * {
-  "access_token": <TOKEN>,
-  "expires_in": <EXPIRATION (in seconds)>,
-  "refresh_token": <REFRESH TOKEN>
-}
- */
+
   res.status(200).json({ access_token, expires_in, refresh_token });
 }

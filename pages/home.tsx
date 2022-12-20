@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { GetUserMeResult, Project, User } from 'figma-api/lib/api-types';
 import { useRouter } from 'next/router';

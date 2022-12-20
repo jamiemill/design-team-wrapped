@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
-import HeadTag from '../components/headtag';
 import Image from "next/image";
 import Logo from "../components/logo";
 
