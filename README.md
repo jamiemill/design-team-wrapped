@@ -5,6 +5,10 @@
 This is a next.js experiment that generates end-of-2022 stats for a team using
 the Figma API. Try it at https://wrapped.jamiemill.com
 
+It will build a page a bit like this:
+
+<img src="public/example.png" width=400 />
+
 ## Running locally
 
 1. Create an App at https://figma.com/developers, give it a name
