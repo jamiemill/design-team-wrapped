@@ -3,7 +3,7 @@
 <img src="public/design-team-wrapped-logo%403x.png" width=500 />
 
 This is a next.js experiment that generates end-of-2022 stats for a team using
-the Figma API.
+the Figma API. Try it at https://wrapped.jamiemill.com
 
 ## Running locally
 
