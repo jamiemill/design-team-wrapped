@@ -19,6 +19,11 @@ NEXT_PUBLIC_USE_STUBS=false
 
 5. Then run `npm run dev` to develop locally.
 
+## Stubbing the data
+
+If you set `NEXT_PUBLIC_USE_STUBS=true` you'll a largeish volums of randomly
+generated data to test with locally.
+
 ## Deploy on Vercel
 
 Set the same environment variables on Vercal that you see in the file above,
