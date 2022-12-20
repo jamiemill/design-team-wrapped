@@ -40,13 +40,19 @@ function GetResults() {
 
         apiWrapper.getMe().then(me => {
             setUser(me);
-            crawler.crawlTeam().then(data => setData(data));
+            crawler.crawlTeam().then(data => setData(data)).catch(function (e) {
+                if (e.response.status === 400 || e.response.status === 404) {
+                    crawler.destroy();
+                    setStatus(`Got error from Figma API: "${e.response.data.message}". Perhaps you signed in with the wrong Figma account?`);
+                } else {
+                    setStatus(`Error calling the Figma API. Refresh to try again. Message: ${e.message}`)
+                }
+            });
         }).catch(function (e) {
-            console.log(arguments);
             if (e.response.status === 403) {
                 setAuthError(true);
             } else {
-                throw e;
+                setStatus(`Error checking your user profile. Message: ${e.message}`)
             }
         });
         return () => {
