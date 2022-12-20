@@ -2,6 +2,7 @@ import Image from "next/image";
 import { User } from "figma-api/lib/api-types";
 import { ReactNode, useState } from "react";
 import { Data } from "../lib/crawler";
+import Link from "next/link";
 
 function Avatar({ user, size = 20 }: { user: User, size: number }) {
     return <Image src={user.img_url} width={size} height={size} alt={`Avatar of ${user.handle}`} className="rounded-full" />
@@ -122,6 +123,13 @@ export default function Presentation({ data }: { data: Data }) {
                 </Disclose>
             </>}
         </Section>
+
+        <div className="my-8 font-bold text-l">
+            <Link href="/">
+                <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
+                Go back and try a different team
+            </Link>
+        </div>
 
     </div >
 }
