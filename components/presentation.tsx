@@ -125,7 +125,7 @@ export default function Presentation({ data }: { data: Data }) {
             <Section title="Longest thread" subtitle="What really got you talking?">
                 <div className="font-black text-xl">{longestThread.length - 1} replies</div>
                 <RenderComment comment={longestThread[0]} />
-                <div>{uniqBy(longestThread.slice(1), (c) => c.user.handle).map(c => <Avatar key={c.id} user={c.user} size={30} />)}</div>
+                <div>Replies from: {uniqBy(longestThread, (c) => c.user.handle).map(c => <Avatar key={c.id} user={c.user} size={30} />)}</div>
                 <div>on file: <span className="font-black">{data.files[longestThread[0].file_key].file.name}</span></div>
                 <div><Image src={data.files[longestThread[0].file_key].file.thumbnail_url} alt="Thumbnail of the file" width={200} height={120} /></div>
             </Section>
