@@ -56,13 +56,13 @@ export default function Index() {
   return (
     <>
       <Logo />
-      <div className='flex justify-center my-8'>
+      <div className='flex justify-center my-4'>
         <div className='max-w-xl'>
-          <p className='mb-4 text-2xl font-black font-display'>What did your team get up to in Figma this year?</p>
-          <p className='mb-4'>Paste in the link of your team (not your org or a project), and we&apos;ll count up the files and comments and show you where the action was.</p>
+          <p className='mb-4 text-2xl font-black tracking-tight'>What did your team get up to in Figma this year?</p>
+          <p className='mb-2'>Paste in the link of your team, and we&apos;ll count up the files and comments and show you where the action was.</p>
         </div>
       </div>
-      <div className='flex justify-center my-8'>
+      <div className='flex justify-center mb-8'>
         <div className="max-w-xl w-full flex gap-2 justify-center items-start">
           <div className="w-full">
             <input placeholder="Paste team link here" className="w-full border-2 border-slate-200 rounded-sm p-2" type="text" value={teamIDInputString} onChange={(e) => handleTeamURLChange(e.target.value)} />
@@ -77,8 +77,8 @@ export default function Index() {
         <div className='max-w-xl'>
           <h2 className='font-bold mb-2 mt-12'>Where to find the team link</h2>
           <p className='mb-4'>Ctrl-click or right-click on the team name in the file browser of Figma and choose &quot;Copy link&quot;. Be sure not to click on an organisation or project. This only works with teams.</p>
-          <p className='mb-4'>It should look something like &quot;https://www.figma.com/files/team/123456790&quot;.</p>
-          <p className='mb-4 flex justify-center'><Image src="/how-to-get-team-link.png" width={502 / 2} height={302 / 2} alt="Screenshot of how to right-click on a team in Figma and copy the link." /></p>
+          <p className='mb-4'>It should look something like <code className='font-mono text-xs tracking-tight bg-neutral-100 py-1 px-2 rounded-sm'>https://www.figma.com/files/team/123456790</code>.</p>
+          <p className='mb-4 flex'><Image src="/how-to-get-team-link.png" width={502 / 2} height={302 / 2} alt="Screenshot of how to right-click on a team in Figma and copy the link." /></p>
 
           <h2 className='font-bold mb-2 mt-12'>Security and privacy</h2>
           <p className='mb-4'>We&apos;ll ask you to authorize access to your account, but all data will be requested and processed by your browser — not sent to our servers. We don&apos;t store the access token, but for peace of mind just revoke access in Figma&apos;s Settings &gt; Connected Apps once you&apos;re done.</p>
