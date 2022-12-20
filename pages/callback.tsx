@@ -24,7 +24,7 @@ export default function Callback() {
 
                 localStorage.setItem("token", access_token);
                 setStatus("Token fetched, waiting a little for it to be active...");
-                setTimeout(() => router.push("/home"), 3000); // delay to wait for token to be active?
+                setTimeout(() => router.push("/results"), 3000); // delay to wait for token to be active?
             });
         } else {
             throw "Oauth state did not match.";

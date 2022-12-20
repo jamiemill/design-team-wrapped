@@ -10,7 +10,7 @@ import Logo from '../components/logo';
 import Crawler, { Data } from '../lib/crawler';
 import Link from 'next/link';
 
-function Results() {
+function GetResults() {
     const [data, setData] = useState<Data | null>(null);
     const [user, setUser] = useState<GetUserMeResult | null>(null);
     const [teamID, setTeamID] = useState<string | null>(null);
@@ -81,12 +81,12 @@ function Results() {
 }
 
 
-export default function Home() {
+export default function Results() {
     const [inBrowser, setInBrowser] = useState(false);
     useEffect(() => setInBrowser(typeof window !== "undefined"), []);
     return (
         <>
-            {inBrowser ? <Results /> : null}
+            {inBrowser ? <GetResults /> : null}
         </>
     )
 }
