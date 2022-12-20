@@ -76,8 +76,8 @@ export default function Index() {
       <div className='flex justify-center my-8'>
         <div className='max-w-xl'>
           <h2 className='font-bold mb-2 mt-12'>Where to find the team link</h2>
-          <p className='mb-4'>Ctrl-click or right-click on the team name in the file browser of Figma and choose 'Copy link'. Be sure not to click on an organisation or project. This only works with teams.</p>
-          <p className='mb-4'>It should look something like "https://www.figma.com/files/team/123456790".</p>
+          <p className='mb-4'>Ctrl-click or right-click on the team name in the file browser of Figma and choose &quot;Copy link&quot;. Be sure not to click on an organisation or project. This only works with teams.</p>
+          <p className='mb-4'>It should look something like &quot;https://www.figma.com/files/team/123456790&quot;.</p>
           <p className='mb-4 flex justify-center'><Image src="/how-to-get-team-link.png" width={502 / 2} height={302 / 2} alt="Screenshot of how to right-click on a team in Figma and copy the link." /></p>
 
           <h2 className='font-bold mb-2 mt-12'>Security and privacy</h2>
