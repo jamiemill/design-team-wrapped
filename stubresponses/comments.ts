@@ -1,6 +1,6 @@
 import pickFrom from "../lib/pickfrom";
 
-const startID = 2000000;
+const startID = 1;
 
 const words =
   "Nice gradient shame about the pixel precision on the button but this is going to really please the sales team";
@@ -33,9 +33,9 @@ export default function (fileKey: string) {
 
   for (let i = startID; i < startID + count; i++) {
     comments.push({
-      "id": "329004533",
+      "id": `${fileKey}-comment-${i}`,
       "file_key": fileKey,
-      "parent_id": "",
+      "parent_id": (Math.random() > 0.7) ? `${fileKey}-comment-${startID}` : "", // make some point at the first comment
       "user": {
         "handle": pickFrom(handles),
         "img_url":

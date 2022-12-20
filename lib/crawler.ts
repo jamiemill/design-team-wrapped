@@ -19,6 +19,7 @@ export type ProgressUpdate = {
 type handle = string;
 type projectID = string;
 type fileKey = string;
+type commentID = string;
 type UserData = {
   user: User;
   comments: Comment[];
@@ -49,15 +50,17 @@ type FileAndProjectAndComments = {
   projectID: string;
   comments: Comment[];
 };
+
 export type Data = {
   users: Record<handle, UserData>;
   projects: Record<projectID, ProjectData>;
   files: Record<fileKey, FileData>;
-  comments: Record<fileKey, FileAndProjectAndComments>; // not sure yet that comments should be stored like this. better to nest inside projects? or just have a flat list?
+  comments: Record<commentID, Comment>;
   stats: {
     filesModifiedThisYearCount: null | number;
     commentsLeftThisYearCount: null | number;
   };
+  commentThreads: Record<commentID, Comment[]>;
 };
 
 export default class Crawler {
@@ -103,6 +106,7 @@ export default class Crawler {
         filesModifiedThisYearCount: null,
         commentsLeftThisYearCount: null,
       },
+      commentThreads: {},
     };
 
     /**
@@ -195,7 +199,7 @@ export default class Crawler {
           .getComments(fileKey);
         return {
           fileKey,
-          projectID: data.files[fileKey].projectID,
+          projectID: data.files[fileKey].projectID, // not needed probably
           comments: result.comments,
         };
       },
@@ -203,10 +207,12 @@ export default class Crawler {
     );
 
     for (const file of allCommentsByFile) {
-      data.comments[file.fileKey] = file;
+      for (const comment of file.comments) {
+        data.comments[comment.id] = comment;
+      }
     }
 
-    const stats = this.analyseAndAugment(data);
+    this.analyseAndAugment(data);
     console.log(data);
 
     this.onGranularStatus && this.onGranularStatus("");
@@ -219,27 +225,37 @@ export default class Crawler {
     /**
      * Get comments per user
      * and get comments per project
+     * and compile all threads
      */
-    for (const fileKey in data.comments) {
-      for (const comment of data.comments[fileKey].comments) {
-        if (!data.users[comment.user.handle]) {
-          data.users[comment.user.handle] = {
-            user: comment.user,
-            comments: [],
-            commentsThisYear: 0,
-            // mentionsOfPeople: {},
-            // mentionedByPeople: {},
-            // commentsOnProjects: {},
-            // mentionedInProjects: {},
-            // commentsOnFiles: {},
-            // mentionedInFiles: {},
-          };
-        }
-        data.users[comment.user.handle].comments.push(comment);
-        const projectID = data.files[fileKey].projectID;
-        if (comment.created_at >= this.periodStart) {
-          data.projects[projectID].commentsThisYear++;
-          data.users[comment.user.handle].commentsThisYear++;
+
+    for (const commentID in data.comments) {
+      const comment = data.comments[commentID];
+      if (!data.users[comment.user.handle]) {
+        data.users[comment.user.handle] = {
+          user: comment.user,
+          comments: [],
+          commentsThisYear: 0,
+          // mentionsOfPeople: {},
+          // mentionedByPeople: {},
+          // commentsOnProjects: {},
+          // mentionedInProjects: {},
+          // commentsOnFiles: {},
+          // mentionedInFiles: {},
+        };
+      }
+      data.users[comment.user.handle].comments.push(comment);
+      const projectID = data.files[comment.file_key].projectID;
+      if (comment.created_at >= this.periodStart) {
+        data.projects[projectID].commentsThisYear++;
+        data.users[comment.user.handle].commentsThisYear++;
+
+        if (comment.parent_id) {
+          if (!data.commentThreads[comment.parent_id]) {
+            data.commentThreads[comment.parent_id] = [
+              data.comments[comment.parent_id],
+            ];
+          }
+          data.commentThreads[comment.parent_id].push(comment);
         }
       }
     }
@@ -262,13 +278,9 @@ export default class Crawler {
         f.file.last_modified >= this.periodStart
       ).length;
 
-    data.stats.commentsLeftThisYearCount = Object.values(data.comments).reduce(
-      (count, fileAndProjectAndComments) =>
-        count +
-        fileAndProjectAndComments.comments.filter((c) =>
-          c.created_at >= this.periodStart
-        ).length,
-      0,
-    );
+    data.stats.commentsLeftThisYearCount =
+      Object.values(data.comments).filter((c) =>
+        c.created_at >= this.periodStart
+      ).length;
   }
 }

@@ -1,6 +1,6 @@
 import pickFrom from "../lib/pickfrom";
 
-const startID = 2000000;
+const startID = 1;
 
 const areas = [
   "Onboarding",

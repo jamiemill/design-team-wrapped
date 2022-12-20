@@ -1,7 +1,7 @@
 import pickFrom from "../lib/pickfrom";
 
 const count = 10;
-const startID = 2000000;
+const startID = 1;
 
 const foods = ["Popcorn", "Ketchup", "Pot Noodle", "Mochi", "Onigiri"];
 const animals = ["Wolves", "Snakes", "Bears", "Pandas", "Turtles"];
