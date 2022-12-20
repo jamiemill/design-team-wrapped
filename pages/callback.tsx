@@ -34,7 +34,7 @@ export default function Callback() {
     }, [router]);
 
     return <>
-        <div className="my-8 font-bold text-l text-center">
+        <div className="my-8 text-l text-center">
             <Link href="/">
                 <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
                 Go back and try a different team

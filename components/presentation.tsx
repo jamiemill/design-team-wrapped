@@ -124,7 +124,7 @@ export default function Presentation({ data }: { data: Data }) {
             </>}
         </Section>
 
-        <div className="my-8 font-bold text-l">
+        <div className="my-8 text-l">
             <Link href="/">
                 <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
                 Go back and try a different team

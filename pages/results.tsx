@@ -70,12 +70,12 @@ function GetResults() {
     }
 
     return <div>
-        <div className="flex gap-2 justify-between mb-8 p-2 text-neutral-500 text-xs border-b">
+        <div className="flex gap-2 justify-between mb-8 py-6 text-neutral-500 text-xs">
             {user && <Avatar user={user} handleSignOut={handleSignOut} />}
             <div>Team # {teamID}</div>
         </div>
 
-        <div className="my-8 font-bold text-l text-center">
+        <div className="my-8 text-l text-center">
             <Link href="/">
                 <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
                 Go back and try a different team
