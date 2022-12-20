@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { User } from "figma-api/lib/api-types";
+import { User, Comment } from "figma-api/lib/api-types";
 import { ReactNode, useState } from "react";
 import { Data } from "../lib/crawler";
 import Link from "next/link";
 import BackLink from "./back_link";
+import { maxBy, uniqBy } from "remeda";
 
 function Avatar({ user, size = 20 }: { user: User, size: number }) {
-    return <Image src={user.img_url} width={size} height={size} alt={`Avatar of ${user.handle}`} className="rounded-full" />
+    return <Image src={user.img_url} width={size} height={size} alt={`Avatar of ${user.handle}`} className="rounded-full inline-block" />
 }
 
 function Section({ children, title, subtitle }: { children: ReactNode, title: string, subtitle: string }) {
@@ -68,6 +69,7 @@ export default function Presentation({ data }: { data: Data }) {
     const projectsByFileCount = Object.values(data.projects).slice(0).sort((a, b) => b.filesModifiedThisYear - a.filesModifiedThisYear);
     const projectsByCommentCount = Object.values(data.projects).slice(0).sort((a, b) => b.commentsThisYear - a.commentsThisYear);
     const commentLeaderBoard = Object.values(data.users).slice(0).sort((a, b) => b.commentsThisYear - a.commentsThisYear);
+    const longestThread = maxBy(Object.values(data.commentThreads), (thread) => thread.length);
 
     return <div className="flex flex-col gap-10 items-center">
         <h2 className="text-2xl font-display font-black pt-10 -skew-y-2 uppercase">This year your team...</h2>
@@ -119,6 +121,30 @@ export default function Presentation({ data }: { data: Data }) {
             </>}
         </Section>
 
+        {longestThread &&
+            <Section title="Longest thread" subtitle="What really got you talking?">
+                <div className="font-black text-xl">{longestThread.length - 1} replies</div>
+                <RenderComment comment={longestThread[0]} />
+                <div>{uniqBy(longestThread.slice(1), (c) => c.user.handle).map(c => <Avatar user={c.user} size={30} />)}</div>
+                <div>on file: <span className="font-black">{data.files[longestThread[0].file_key].file.name}</span></div>
+                <div><Image src={data.files[longestThread[0].file_key].file.thumbnail_url} alt="Thumbnail of the file" width={200} height={120} /></div>
+            </Section>
+        }
+
         <BackLink />
+    </div>
+}
+
+
+function RenderComment({ comment }: { comment: Comment }) {
+    return <div className="p-4 border-2 border-neutral-200 rounded-tl-xl rounded-tr-xl rounded-br-xl flex gap-2">
+        <div>
+            <Avatar user={comment.user} size={40} />
+        </div>
+        <div>
+            <div><span className="font-bold">{comment.user.handle}</span> on {new Date(comment.created_at).toLocaleDateString()}</div>
+            <div>{comment.message}</div>
+        </div>
+
     </div>
 }
