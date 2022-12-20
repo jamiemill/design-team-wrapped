@@ -1,5 +1,7 @@
 # Design Team Wrapped
 
+<img src="public/design-team-wrapped-logo%403x.png" width=500 />
+
 This is a next.js app that generates end-of-2022 stats for a team using the
 Figma API.
 
