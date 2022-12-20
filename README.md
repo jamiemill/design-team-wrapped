@@ -21,7 +21,7 @@ NEXT_PUBLIC_USE_STUBS=false
 
 ## Stubbing the data
 
-If you set `NEXT_PUBLIC_USE_STUBS=true` you'll a largeish volums of randomly
+If you set `NEXT_PUBLIC_USE_STUBS=true` you'll get a largeish volume of randomly
 generated data to test with locally.
 
 ## Deploy on Vercel
