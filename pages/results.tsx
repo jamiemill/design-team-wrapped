@@ -68,6 +68,13 @@ function GetResults() {
             {user && <Avatar user={user} handleSignOut={handleSignOut} />}
             <div>Team # {teamID}</div>
         </div>
+
+        <div className="my-8 font-bold text-l text-center">
+            <Link href="/">
+                <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
+                Go back and try a different team
+            </Link>
+        </div>
         <Logo />
         {authError ? <div className='font-mono text-xs mx-auto text-left max-w-[600px] text-rose-600'>You were signed out. Please <Link href="/" className='underline'>go back and re-connect Figma.</Link></div> :
             data ?

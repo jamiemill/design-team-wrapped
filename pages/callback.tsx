@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import Logo from '../components/logo';
+import Link from 'next/link';
+import Image from "next/image";
 
 export default function Callback() {
 
@@ -32,6 +34,12 @@ export default function Callback() {
     }, [router]);
 
     return <>
+        <div className="my-8 font-bold text-l text-center">
+            <Link href="/">
+                <Image src="/disclose.svg" alt="" width="14" height="9" className="inline-block rotate-90 mr-1" />
+                Go back and try a different team
+            </Link>
+        </div>
         <Logo />
         <div className='p-24 font-mono text-xs text-center'>{status}</div>
     </>
