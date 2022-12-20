@@ -64,14 +64,8 @@ function BigStat({ prefix, value, suffix }: { prefix: string, value: string | nu
 
 
 export default function Presentation({ data }: { data: Data }) {
-
-    // const projectsByFileCount = results.data.slice(0).sort((a, b) => b.filesModifiedThisYear - a.filesModifiedThisYear);
     const projectsByFileCount = Object.values(data.projects).slice(0).sort((a, b) => b.filesModifiedThisYear - a.filesModifiedThisYear);
-    console.log(projectsByFileCount);
-
-    // const projectsByCommentCount = results.data.slice(0).sort((a, b) => b.comments - a.comments);
     const projectsByCommentCount = Object.values(data.projects).slice(0).sort((a, b) => b.commentsThisYear - a.commentsThisYear);
-    // const commentLeaderBoard = Object.entries(results.totals.commentsByPerson).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count);
     const commentLeaderBoard = Object.values(data.users).slice(0).sort((a, b) => b.commentsThisYear - a.commentsThisYear);
 
     return <div className="flex flex-col gap-10 items-center">
