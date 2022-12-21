@@ -32,7 +32,7 @@ generated data to test with locally.
 
 ## Deploy on Vercel
 
-Set the same environment variables on Vercal that you see in the file above,
+Set the same environment variables on Vercel that you see in the file above,
 changing localhost to the domain of the deployment.
 
 Don't forget to add an additional callback in the client app setup on
